@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.io.mapper.IotMeteorologyRelayStatusMapper">
+
+    <select id="selectLatestByDeviceAdr" resultType="com.management.io.domain.IotMeteorologyRelayStatus"
+            parameterType="java.lang.String">
+        SELECT * FROM iot_meteorology_relay_status
+        WHERE device_adr = #{deviceAdr}
+        ORDER BY timestamp DESC
+    </select>
+
+    <select id="selectLatestByDeviceAdrAndRelayNo"
+            resultType="com.management.io.domain.IotMeteorologyRelayStatus">
+        SELECT * FROM iot_meteorology_relay_status
+        WHERE device_adr = #{valueOf}
+        AND relay_no = #{relayNo}
+        ORDER BY timestamp DESC
+    </select>
+
+    <insert id="insertMeteorologyRelayStatus"
+            parameterType="com.management.io.domain.IotMeteorologyRelayStatus">
+        INSERT INTO iot_meteorology_relay_status
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="relayId != null">relay_id,</if>
+            <if test="deviceAdr != null">device_adr,</if>
+            <if test="relayNo != null">relay_no,</if>
+            <if test="relayStatus != null">relay_status,</if>
+            <if test="timestamp != null">timestamp,</if>
+            create_time
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="relayId != null">#{relayId},</if>
+            <if test="deviceAdr != null">#{deviceAdr},</if>
+            <if test="relayNo != null">#{relayNo},</if>
+            <if test="relayStatus != null">#{relayStatus},</if>
+            <if test="timestamp != null">#{timestamp},</if>
+            CURRENT_TIMESTAMP
+        </trim>
+    </insert>
+
+    <update id="updateMeteorologyRelayStatus"
+            parameterType="com.management.io.domain.IotMeteorologyRelayStatus">
+        UPDATE iot_meteorology_relay_status
+        <set>
+            <if test="deviceAdr != null">device_adr = #{deviceAdr},</if>
+            <if test="relayNo != null">relay_no = #{relayNo},</if>
+            <if test="relayStatus != null">relay_status = #{relayStatus},</if>
+            <if test="timestamp != null">timestamp = #{timestamp},</if>
+        </set>
+        WHERE relay_id = #{relayId}
+    </update>
+</mapper>

@@ -1,0 +1,13 @@
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/config/GenConfig.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/controller/GenController.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/domain/GenTable.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/domain/GenTableColumn.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/mapper/GenTableColumnMapper.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/mapper/GenTableMapper.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/service/GenTableColumnServiceImpl.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/service/GenTableServiceImpl.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/service/IGenTableColumnService.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/service/IGenTableService.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/util/GenUtils.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/util/VelocityInitializer.java
+/Users/flipped/Desktop/iot/IoT-hardware/management-generator/src/main/java/com/management/generator/util/VelocityUtils.java

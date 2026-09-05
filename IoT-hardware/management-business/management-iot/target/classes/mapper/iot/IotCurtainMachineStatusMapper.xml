@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.iot.mapper.IotCurtainMachineStatusMapper">
+
+    <!--  插入继电器信息  -->
+    <insert id="insertRelayDeviceStatus" parameterType="com.management.iot.domain.IotCurtainMachineStatus">
+        INSERT INTO iot_curtain_machine_status
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="curtainMachineId != null">curtain_machine_id,</if>
+            <if test="curtainMachineName != null">relay_device_name,</if>
+            <if test="status != null">status,</if>
+            <if test="protocolId != null">protocol_id,</if>
+            create_time
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="curtainMachineId != null">#{curtainMachineId},</if>
+            <if test="curtainMachineName != null">#{curtainMachineName},</if>
+            <if test="status != null">#{status},</if>
+            <if test="protocolId != null">#{protocolId},</if>
+            CURRENT_TIMESTAMP
+        </trim>
+    </insert>
+
+    <insert id="insertCurtainMachineStatusService">
+        INSERT INTO iot_curtain_machine_status
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="curtainMachineId != null">curtain_machine_id,</if>
+            <if test="curtainMachineName != null">curtain_machine_name,</if>
+            <if test="status != null">status,</if>
+            <if test="protocolId != null">protocol_id,</if>
+            create_time
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="curtainMachineId != null">#{curtainMachineId},</if>
+            <if test="curtainMachineName != null">#{curtainMachineName},</if>
+            <if test="status != null">#{status},</if>
+            <if test="protocolId != null">#{protocolId},</if>
+            CURRENT_TIMESTAMP
+        </trim>
+    </insert>
+
+    <select id="getCurtainMachineStatusByProtocol" resultType="com.management.iot.domain.IotCurtainMachineStatus"
+            parameterType="java.lang.Long">
+        SELECT * FROM iot_curtain_machine_status
+        WHERE protocol_id = #{protocolId}
+        ORDER BY create_time DESC
+        LIMIT 1
+    </select>
+
+</mapper>

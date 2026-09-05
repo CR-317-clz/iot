@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    
+    <!-- WebRTC Streamer Library - 必须在 Vue 应用之前加载 -->
+    <script src="<%= BASE_URL %>webrtcstreamer.js" type="text/javascript"></script>
+    <script>
+      // 验证 WebRtcStreamer 是否成功加载
+      if (typeof WebRtcStreamer === 'undefined') {
+        console.error('❌ WebRtcStreamer 库加载失败！');
+        console.error('请检查 public/webrtcstreamer.js 文件是否存在');
+      } else {
+        console.log('✅ WebRtcStreamer 库加载成功！');
+        console.log('WebRtcStreamer 类型:', typeof WebRtcStreamer);
+      }
+    </script>
+  </body>
+</html>

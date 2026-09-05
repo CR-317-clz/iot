@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="management-lock" />
+        <module name="management-iot" />
+        <module name="management-framework" />
+        <module name="management-generator" />
+        <module name="management-admin" />
+        <module name="management-camera" />
+        <module name="management-common" />
+        <module name="management-sim" />
+        <module name="management-quartz" />
+        <module name="management-system" />
+        <module name="management-4GIO" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="management-hik" target="17" />
+      <module name="management-mqtt" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="IoT-hardware" options="-parameters" />
+      <module name="management-4GIO" options="-parameters" />
+      <module name="management-admin" options="-parameters" />
+      <module name="management-business" options="-parameters" />
+      <module name="management-camera" options="-parameters" />
+      <module name="management-common" options="-parameters" />
+      <module name="management-framework" options="-parameters" />
+      <module name="management-generator" options="-parameters" />
+      <module name="management-hik" options="-parameters" />
+      <module name="management-iot" options="-parameters" />
+      <module name="management-lock" options="-parameters" />
+      <module name="management-mqtt" options="-parameters" />
+      <module name="management-quartz" options="-parameters" />
+      <module name="management-sim" options="-parameters" />
+      <module name="management-system" options="-parameters" />
+      <module name="management_system" options="-parameters" />
+    </option>
+  </component>
+</project>

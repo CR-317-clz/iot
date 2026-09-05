@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.io.mapper.IotMeteorologyNodeMapper">
+
+    <select id="selectLatestByDeviceAdr" resultType="com.management.io.domain.IotMeteorologyNode"
+            parameterType="java.lang.String">
+        select * from iot_meteorology_node where device_adr = #{deviceAdr} order by create_time desc
+    </select>
+
+    <insert id="insertMeteorologyNode" parameterType="com.management.io.domain.IotMeteorologyNode">
+        INSERT INTO iot_meteorology_node
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nodeId != null">node_id,</if>
+            <if test="nodeCodeId != null">node_code_id,</if>
+            <if test="nodeJson != null">node_json,</if>
+            <if test="deviceAdr != null">device_adr,</if>
+            create_time
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="nodeId != null">#{nodeId},</if>
+            <if test="nodeCodeId != null">#{nodeCodeId},</if>
+            <if test="nodeJson != null">#{nodeJson},</if>
+            <if test="deviceAdr != null">#{deviceAdr},</if>
+            CURRENT_TIMESTAMP
+        </trim>
+    </insert>
+
+    <update id="updateMeteorologyNode" parameterType="com.management.io.domain.IotMeteorologyNode">
+        UPDATE iot_meteorology_node
+        <set>
+            <if test="nodeCodeId != null">node_code_id = #{nodeCodeId},</if>
+            <if test="nodeJson != null">node_json = #{nodeJson},</if>
+            <if test="deviceAdr != null">device_adr = #{deviceAdr},</if>
+        </set>
+            WHERE node_id = #{nodeId}
+    </update>
+
+    <select id="selectByDeviceAddrAndNodeId" parameterType="com.management.io.domain.IotMeteorologyNode"
+            resultType="com.management.io.domain.IotMeteorologyNode">
+        select * from iot_meteorology_node where device_adr = #{valueOf} and node_id = #{nodeId}
+    </select>
+
+</mapper>

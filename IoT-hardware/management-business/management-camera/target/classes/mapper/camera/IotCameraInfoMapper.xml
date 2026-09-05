@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.camera.mapper.IotCameraInfoMapper">
+
+    <!--  查询所有设备信息  -->
+    <select id="selectAllCamera" resultType="com.management.camera.domain.IotCameraInfo">
+        SELECT * FROM iot_camera_info ORDER BY create_time DESC
+    </select>
+
+    <!--  根据摄像头ID查询设备信息  -->
+    <select id="selectCameraById" resultType="com.management.camera.domain.IotCameraInfo"
+            parameterType="java.lang.Long">
+        SELECT * FROM iot_camera_info WHERE camera_id = #{cameraId}
+    </select>
+
+    <!--  根据摄像头编码查询设备信息  -->
+    <select id="selectCameraByCode" resultType="com.management.camera.domain.IotCameraInfo"
+            parameterType="java.lang.String">
+        SELECT * FROM iot_camera_info WHERE camera_code = #{cameraCode}
+    </select>
+
+    <!--  根据协议ID查询使用该协议的设备列表  -->
+    <select id="selectCameraByDeviceId" resultType="com.management.camera.domain.IotCameraInfo"
+            parameterType="java.lang.Long">
+        SELECT * FROM iot_camera_info WHERE device_id = #{deviceId}
+    </select>
+
+    <select id="getCameraByDeviceIdData" resultType="com.management.camera.domain.IotCameraInfo"
+            parameterType="java.lang.Long">
+        SELECT * FROM iot_camera_info WHERE device_id = #{deviceId}
+    </select>
+
+    <!--  插入新摄像头信息  -->
+    <insert id="insertCamera" parameterType="com.management.camera.domain.IotCameraInfo">
+        INSERT INTO iot_camera_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cameraId != null">camera_id,</if>
+            <if test="cameraName != null">camera_name,</if>
+            <if test="cameraCode != null">camera_code,</if>
+            <if test="cameraType != null">camera_type,</if>
+            <if test="ipAddress != null">ip_address,</if>
+            <if test="port != null">port,</if>
+            <if test="location != null">location,</if>
+            <if test="status != null">status,</if>
+            <if test="manufacturer != null">manufacturer,</if>
+            <if test="model != null">model,</if>
+            <if test="resolution != null">resolution,</if>
+            <if test="streamUrl != null">stream_url,</if>
+            <if test="deviceId != null">device_id,</if>
+            <if test="remark != null">remark,</if>
+            create_time
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="cameraId != null">#{cameraId},</if>
+            <if test="cameraName != null">#{cameraName},</if>
+            <if test="cameraCode != null">#{cameraCode},</if>
+            <if test="cameraType != null">#{cameraType},</if>
+            <if test="ipAddress != null">#{ipAddress},</if>
+            <if test="port != null">#{port},</if>
+            <if test="location != null">#{location},</if>
+            <if test="status != null">#{status},</if>
+            <if test="manufacturer != null">#{manufacturer},</if>
+            <if test="model != null">#{model},</if>
+            <if test="resolution != null">#{resolution},</if>
+            <if test="streamUrl != null">#{streamUrl},</if>
+            <if test="deviceId != null">#{deviceId},</if>
+            <if test="remark != null">#{remark},</if>
+            CURRENT_TIMESTAMP
+        </trim>
+    </insert>
+
+    <!--  更新摄像头信息  -->
+    <update id="updateCamere" parameterType="com.management.iot.domain.IotDevice">
+        UPDATE iot_camera_info
+        <set>
+            <if test="cameraName != null">camera_name = #{cameraName},</if>
+            <if test="cameraCode != null">camera_code = #{cameraCode},</if>
+            <if test="cameraType != null">camera_type = #{cameraType},</if>
+            <if test="ipAddress != null">ip_address = #{ipAddress},</if>
+            <if test="port != null">port = #{port},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="manufacturer != null">manufacturer = #{manufacturer},</if>
+            <if test="model != null">model = #{model},</if>
+            <if test="resolution != null">resolution = #{resolution},</if>
+            <if test="streamUrl != null">stream_url = #{streamUrl},</if>
+            <if test="deviceId != null">device_id = #{deviceId},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            update_time = CURRENT_TIMESTAMP
+        </set>
+        WHERE camera_id = #{cameraId}
+    </update>
+
+    <!--  根据设备ID删除设备  -->
+    <delete id="deleteCameraById" parameterType="java.lang.Long">
+        DELETE FROM iot_camera_info WHERE camera_id = #{cameraId}
+    </delete>
+
+</mapper>

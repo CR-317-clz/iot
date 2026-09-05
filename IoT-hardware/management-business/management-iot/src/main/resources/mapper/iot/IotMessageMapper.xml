@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.iot.mapper.IotMessageMapper">
+
+    <!--  查询所有消息记录  -->
+    <select id="selectAllMessages" resultType="com.management.iot.domain.IotMessage">
+        SELECT * FROM iot_message ORDER BY recv_time DESC
+    </select>
+
+    <!--  根据消息ID查询消息  -->
+    <select id="selectMessageById" resultType="com.management.iot.domain.IotMessage"
+            parameterType="java.lang.Long">
+        SELECT * FROM iot_message WHERE msg_id = #{msgId}
+    </select>
+
+    <!--  根据设备ID查询消息列表  -->
+    <select id="selectMessagesByDeviceId" resultType="com.management.iot.domain.IotMessage"
+            parameterType="java.lang.Long">
+        SELECT * FROM iot_message WHERE device_id = #{deviceId} ORDER BY recv_time DESC
+    </select>
+
+    <!--  根据主题查询消息列表  -->
+    <select id="selectMessagesByTopic" resultType="com.management.iot.domain.IotMessage"
+            parameterType="java.lang.String">
+        SELECT * FROM iot_message WHERE topic LIKE CONCAT('%', #{topic}, '%') ORDER BY recv_time DESC
+    </select>
+
+    <!--  统计未解析的消息数量  -->
+    <select id="countUnparsedMessages" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM iot_message WHERE parsed = false
+    </select>
+
+    <!--  插入新消息记录  -->
+    <insert id="insertMessage" parameterType="com.management.iot.domain.IotMessage">
+        INSERT INTO iot_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deviceId != null">device_id,</if>
+            <if test="topic != null">topic,</if>
+            <if test="payload != null">payload,</if>
+            recv_time,
+            <if test="parsed != null">parsed,</if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="deviceId != null">#{deviceId},</if>
+            <if test="topic != null">#{topic},</if>
+            <if test="payload != null">#{payload},</if>
+            CURRENT_TIMESTAMP,
+            <if test="parsed != null">#{parsed},</if>
+        </trim>
+    </insert>
+
+    <!--  批量插入消息记录  -->
+    <insert id="batchInsertMessages"
+            parameterType="java.util.List">
+        INSERT INTO iot_message (device_id, topic, payload, recv_time, parsed)
+        VALUES
+        <foreach collection="messages" item="message" separator=",">
+            (#{message.deviceId}, #{message.topic}, #{message.payload}, CURRENT_TIMESTAMP, #{message.parsed})
+        </foreach>
+    </insert>
+
+    <!--  更新消息解析状态  -->
+    <update id="updateMessageParsedStatus">
+        UPDATE iot_message
+        <set>
+            <if test="topic != null">topic = #{topic},</if>
+            <if test="payload != null">payload = #{payload},</if>
+            <if test="parsed != null">parsed = #{parsed},</if>
+        </set>
+        WHERE msg_id = #{msgId}
+    </update>
+
+    <!--  根据设备ID删除消息记录  -->
+    <delete id="deleteMessagesByDeviceId" parameterType="java.lang.Integer">
+        DELETE FROM iot_message WHERE device_id = #{deviceId}
+    </delete>
+</mapper>

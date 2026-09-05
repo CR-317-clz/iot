@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.io.mapper.IotMeteorologyRegisterDataMapper">
+
+
+    <insert id="insertMeteorologyRegisterData"
+            parameterType="com.management.io.domain.IotMeteorologyRegisterData">
+        INSERT INTO iot_meteorology_register_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dataId != null">data_id,</if>
+            <if test="deviceAddr != null">device_addr,</if>
+            <if test="nodeId != null">node_id,</if>
+            <if test="registerId != null">register_id,</if>
+            <if test="dataValue != null">data_value,</if>
+            <if test="valueNum != null">value_num,</if>
+            <if test="alarmLevel != null">alarm_level,</if>
+            <if test="alarmColor != null">alarm_color,</if>
+            <if test="alarmInfo != null">alarm_info,</if>
+            <if test="unit != null">unit,</if>
+            <if test="registerName != null">register_name,</if>
+            create_time
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="dataId != null">#{dataId},</if>
+            <if test="deviceAddr != null">#{deviceAddr},</if>
+            <if test="nodeId != null">#{nodeId},</if>
+            <if test="registerId != null">#{registerId},</if>
+            <if test="dataValue != null">#{dataValue},</if>
+            <if test="valueNum != null">#{valueNum},</if>
+            <if test="alarmLevel != null">#{alarmLevel},</if>
+            <if test="alarmColor != null">#{alarmColor},</if>
+            <if test="alarmInfo != null">#{alarmInfo},</if>
+            <if test="unit != null">#{unit},</if>
+            <if test="registerName != null">#{registerName},</if>
+            CURRENT_TIMESTAMP
+        </trim>
+    </insert>
+
+    <!--  根据设备ID查询测点数据  -->
+    <select id="getMeteorologyRegisterDataByDeviceId" resultType="com.management.io.domain.IotMeteorologyRegisterData"
+            parameterType="java.lang.Long">
+        SELECT
+            da.*
+        FROM
+            iot_device AS dev
+                JOIN iot_meteorology_device AS met ON dev.meteorology_id = met.device_id
+                JOIN iot_meteorology_register_data AS da ON met.device_addr = da.device_addr
+        WHERE
+            dev.device_id = #{deviceId}
+        ORDER BY da.create_time DESC
+            LIMIT 11
+    </select>
+
+    <!--  获取指定设备下的温湿度测点数据  -->
+    <select id="getStatisticsOfTemperatureAndHumidity"
+            resultType="com.management.io.domain.vo.StatisticsOfTemperatureAndHumidityVo">
+        SELECT
+        CASE DAYOFWEEK(da.create_time)
+        WHEN 2 THEN '周一'
+        WHEN 3 THEN '周二'
+        WHEN 4 THEN '周三'
+        WHEN 5 THEN '周四'
+        WHEN 6 THEN '周五'
+        WHEN 7 THEN '周六'
+        WHEN 1 THEN '周日'
+        ELSE '未知'
+        END AS week_day,
+        da.register_name,
+        CAST(ROUND(AVG(da.value_num), 2) AS DECIMAL(10, 2)) AS avg_value,
+        COUNT(*) AS data_count
+        FROM
+        iot_device dev
+        JOIN iot_meteorology_device met ON dev.meteorology_id = met.device_id
+        JOIN iot_meteorology_register_data da ON met.device_addr = da.device_addr
+        WHERE
+        da.device_addr = #{deviceAddr}
+        AND da.register_name IN ('空气温度', '空气湿度')
+        AND da.create_time &gt;= DATE_SUB(DATE(CURRENT_DATE), INTERVAL (DAYOFWEEK(CURRENT_DATE)-1) DAY)
+        AND da.create_time &lt; DATE_SUB(DATE(CURRENT_DATE), INTERVAL (DAYOFWEEK(CURRENT_DATE)-1) DAY) + INTERVAL 7 DAY
+        GROUP BY
+        DAYOFWEEK(da.create_time),
+        da.register_name
+        ORDER BY
+        DAYOFWEEK(da.create_time),
+        da.register_name;
+
+    </select>
+    <select id="iotMeteorologyRegisterDataByAddress"
+            resultType="com.management.io.domain.IotMeteorologyRegisterData">
+        SELECT
+            da.*
+        FROM
+            iot_device dev
+                JOIN iot_meteorology_device met
+                     ON dev.meteorology_id = met.device_id
+                JOIN iot_meteorology_register_data da
+                     ON met.device_addr = da.device_addr
+        WHERE
+            da.device_addr = #{deviceAddr}
+        ORDER BY da.create_time DESC
+            LIMIT 11
+    </select>
+
+    <!--  根据设备地址查询测点数据  -->
+    <select id="SelectIotMeteorologyRegisterDataByAddress"
+            resultType="com.management.io.domain.IotMeteorologyRegisterData">
+        SELECT
+            da.*
+        FROM
+            iot_meteorology_register_data da
+        WHERE
+            da.device_addr = #{deviceAddr}
+        ORDER BY
+            da.create_time DESC
+            LIMIT 11
+    </select>
+
+    <select id="getMeteorologyRegisterData"
+            resultType="com.management.io.domain.IotMeteorologyRegisterData">
+        SELECT
+            da.*
+        FROM
+            iot_device AS dev
+                JOIN iot_meteorology_device AS met ON dev.meteorology_id = met.device_id
+                JOIN iot_meteorology_register_data AS da ON met.device_addr = da.device_addr
+        WHERE
+            dev.device_id = #{deviceId} and da.register_name IN ( '风力', '风速', '风向' )
+        ORDER BY da.create_time DESC
+            LIMIT 11
+    </select>
+    <select id="getRainfallDataByDeviceId" resultType="com.management.io.domain.vo.StatisticsRainfallVo"
+            parameterType="java.lang.Long">
+        SELECT
+        DATE_FORMAT(da.create_time, '%Y-%m-%d') AS recordDate,
+        CASE DAYOFWEEK(da.create_time)
+        WHEN 1 THEN '星期日'
+        WHEN 2 THEN '星期一'
+        WHEN 3 THEN '星期二'
+        WHEN 4 THEN '星期三'
+        WHEN 5 THEN '星期四'
+        WHEN 6 THEN '星期五'
+        WHEN 7 THEN '星期六'
+        END AS dayChinese,
+        CASE
+        WHEN DAYOFWEEK(da.create_time) = 1 THEN '7'
+        ELSE CAST((DAYOFWEEK(da.create_time) - 1) AS CHAR)
+        END AS weekdayOrder,
+        '雨量' AS dataKeyChinese,
+        -- 使用FORMAT或CAST确保返回字符串
+        FORMAT(ROUND(AVG(da.data_value), 2), 2) AS dailyRainfallMm,
+        CAST(COUNT(*) AS CHAR) AS recordCount,
+        'mm' AS unit
+        FROM
+        iot_device AS dev
+        JOIN iot_meteorology_device AS met ON dev.meteorology_id = met.device_id
+        JOIN iot_meteorology_register_data AS da ON met.device_addr = da.device_addr
+        WHERE
+        dev.device_id = #{deviceId}
+        -- 查询本周数据
+        AND da.create_time >= DATE_ADD(CURDATE(), INTERVAL -WEEKDAY(CURDATE()) DAY)
+        AND da.create_time &lt; DATE_ADD(DATE_ADD(CURDATE(), INTERVAL -WEEKDAY(CURDATE()) DAY), INTERVAL 7 DAY)
+        AND (
+        da.remark LIKE '%日雨量%'
+        OR da.remark LIKE '%昨日雨量%'
+        OR da.remark LIKE '%雨量%'
+        )
+        GROUP BY
+        DATE(da.create_time),
+        DAYOFWEEK(da.create_time)
+        ORDER BY
+        recordDate;
+    </select>
+
+</mapper>

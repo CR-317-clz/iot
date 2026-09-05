@@ -1,0 +1,84 @@
+#!/bin/bash
+#
+# install_docker_kingbase_tar.sh - 一键安装 Docker 并用 tar 包导入人大金仓数据库镜像
+#
+
+set -e
+chmod +x "$0"
+
+# 配置项
+KINGBASE_TAR="/home/kingbase/kingbasees.tar"  # 你的 Kingbase 镜像压缩包路径
+KINGBASE_IMAGE="kingbase/kingbasees:latest"   # 导入后镜像的名字（可以在 load 之后用 docker images 查看实际名字）
+KINGBASE_CONTAINER="kingbase-db"
+KINGBASE_PORT=54321                           # 映射到宿主机的端口
+KINGBASE_PASSWORD="123456"                    # 默认数据库密码
+
+echo "==== 检查系统版本 ===="
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=$ID
+    VERSION=$VERSION_ID
+else
+    echo "无法检测系统版本，请手动安装 Docker."
+    exit 1
+fi
+echo "系统: $OS 版本: $VERSION"
+
+echo "==== 卸载旧版本 Docker（如有） ===="
+sudo yum remove -y docker docker-client docker-client-latest docker-common \
+    docker-latest docker-latest-logrotate docker-logrotate docker-engine 2>/dev/null || true
+sudo apt-get remove -y docker docker-engine docker.io containerd runc 2>/dev/null || true
+
+echo "==== 安装 Docker CE ===="
+if [[ "$OS" =~ ^(centos|rhel|fedora)$ ]]; then
+    sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    sudo yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+elif [[ "$OS" =~ ^(ubuntu|debian)$ ]]; then
+    sudo apt-get update
+    sudo apt-get install -y ca-certificates curl gnupg lsb-release
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/$OS/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/$OS \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+else
+    echo "暂不支持的系统: $OS"
+    exit 1
+fi
+
+echo "==== 启动 Docker 服务 ===="
+sudo systemctl enable docker
+sudo systemctl start docker
+
+echo "==== Docker 安装完成 ===="
+docker --version
+
+echo "==== 检查并导入 Kingbase 镜像 ===="
+if [ -f "$KINGBASE_TAR" ]; then
+    echo "检测到镜像包 $KINGBASE_TAR，正在导入..."
+    docker load -i "$KINGBASE_TAR"
+else
+    echo "未找到镜像包: $KINGBASE_TAR"
+    exit 1
+fi
+
+echo "==== 创建数据目录 ===="
+mkdir -p ~/kingbase/data
+
+echo "==== 启动人大金仓容器 ===="
+docker run -d \
+  --name $KINGBASE_CONTAINER \
+  -e DB_USER=system \
+  -e DB_PASSWORD=$KINGBASE_PASSWORD \
+  -p $KINGBASE_PORT:54321 \
+  -v ~/kingbase/data:/var/lib/kingbase/data \
+  $KINGBASE_IMAGE
+
+echo "==== 部署完成 ===="
+echo "容器名: $KINGBASE_CONTAINER"
+echo "数据库端口: $KINGBASE_PORT"
+echo "用户名: system"
+echo "密码: $KINGBASE_PASSWORD"

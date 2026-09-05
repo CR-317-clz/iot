@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="87cd708c-2621-4fb7-b8a6-92edd6b396ad" name="Changes" comment="完整代码" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GiteeDefaultAccount">
+    <option name="defaultAccountId" value="f65d42c7-fd50-4201-b505-7f4bce2dd333" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="C:\java_version\apache-maven-3.6.3\repository_new" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../java_version/apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="C:\java_version\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2xco8FLS0CNr2fIvk2SCjMDKTsB" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Maven.management_system [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ManagementApplication.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Administrator/Desktop/新建文件夹/IoT-hardware/IoT-hardware&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.33578658&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;8e132549432003aedbb4586b5b790a1a&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\developmental_item\物联网平台-通用性\IoT-hardware\management-business\management-sim\src\main\resources\mapper\sim" />
+      <recent name="E:\developmental_item\物联网平台-通用性\IoT-hardware\management-business\management-iot\src\main\resources\mapper\iot" />
+      <recent name="E:\developmental_item\物联网平台-通用性\IoT-hardware\management-business\management-4GIO\src\main\resources\mapper\io" />
+      <recent name="E:\developmental_item\物联网平台-通用性\IoT-hardware\management-business\management-4GIO\src\main\resources" />
+      <recent name="E:\developmental_item\物联网平台-通用性\IoT-hardware\management-business\management-camera\src\main\resources\mapper\camera" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\developmental_item\物联网平台-通用性\IoT-hardware\management-business\management-4GIO\src\main\resources\mapper\io" />
+      <recent name="E:\item\金扬智能\smart_agriculture_fishery\sql" />
+      <recent name="E:\item\金扬智能\smart_agriculture_fishery\management-admin\src\main\resources\lib" />
+      <recent name="C:\Users\Administrator\Desktop\management_system" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.management.web.controller.business.upload" />
+      <recent name="com.management.iot.kunlun.configuration" />
+      <recent name="com.management.io.domain.vo" />
+      <recent name="com.management.mqtt.service.impl" />
+      <recent name="com.management.mqtt.service" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn mvn install:install-file -Dfile=E:\kingbase8-9.0.0.jar -DgroupId=com.kingbase8 -DartifactId=kingbase8 -Dversion=9.0.0 -Dpackaging=jar" />
+      <command value="mvn mvn install:install-file -DgroupId=com.kingbase8 -DartifactId=kingbase8 -Dversion=8.6.0 -Dfile=E:\kingbase8-9.0.0.jar -Dpackaging=jar" />
+      <command value="mvn install:install-file -DgroupId=com.kingbase8 -DartifactId=kingbase8 -Dversion=8.6.0 -Dfile=E:\kingbase8-9.0.0.jar -Dpackaging=jar" />
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="RuoYi-Vue-springboot3" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="RuoYi-Vue-springboot3" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ManagementApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="management-admin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.management.ManagementApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.management.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.ManagementApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.26222.65" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="87cd708c-2621-4fb7-b8a6-92edd6b396ad" name="Changes" comment="" />
+      <created>1748246561969</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748246561969</updated>
+      <workItem from="1748246563378" duration="941000" />
+      <workItem from="1748248623447" duration="3693000" />
+      <workItem from="1748253848452" duration="329000" />
+      <workItem from="1748309624511" duration="3575000" />
+      <workItem from="1748314610959" duration="47000" />
+      <workItem from="1748314667243" duration="64000" />
+      <workItem from="1748314762615" duration="1107000" />
+      <workItem from="1748397328411" duration="13443000" />
+      <workItem from="1748915868574" duration="16296000" />
+      <workItem from="1749002835331" duration="10146000" />
+      <workItem from="1749022165137" duration="548000" />
+      <workItem from="1749023726622" duration="3840000" />
+      <workItem from="1749027602028" duration="3125000" />
+      <workItem from="1749088377030" duration="20274000" />
+      <workItem from="1749176185083" duration="3363000" />
+      <workItem from="1749281786907" duration="3566000" />
+      <workItem from="1749433520182" duration="2180000" />
+      <workItem from="1749455988593" duration="2362000" />
+      <workItem from="1749460712967" duration="336000" />
+      <workItem from="1751531306946" duration="8191000" />
+      <workItem from="1751594760238" duration="5100000" />
+      <workItem from="1751599896958" duration="147000" />
+      <workItem from="1751600248062" duration="12667000" />
+      <workItem from="1751700242264" duration="495000" />
+      <workItem from="1751853983947" duration="6484000" />
+      <workItem from="1751942418739" duration="3240000" />
+      <workItem from="1752025721558" duration="446000" />
+      <workItem from="1752115694042" duration="6769000" />
+      <workItem from="1752197470994" duration="3201000" />
+      <workItem from="1752306284531" duration="2672000" />
+      <workItem from="1752309714247" duration="162000" />
+      <workItem from="1752543036913" duration="7299000" />
+      <workItem from="1752645198028" duration="8011000" />
+      <workItem from="1752714537072" duration="4841000" />
+      <workItem from="1752731360613" duration="2912000" />
+      <workItem from="1752803299956" duration="11964000" />
+      <workItem from="1753256455461" duration="1228000" />
+      <workItem from="1753772338528" duration="277000" />
+      <workItem from="1753839221888" duration="6117000" />
+      <workItem from="1753949275332" duration="2176000" />
+      <workItem from="1753952727929" duration="57000" />
+      <workItem from="1754012894521" duration="6989000" />
+      <workItem from="1754272698017" duration="8215000" />
+      <workItem from="1754360473223" duration="2163000" />
+      <workItem from="1754443456431" duration="2574000" />
+      <workItem from="1754460038078" duration="2654000" />
+      <workItem from="1754632175964" duration="4093000" />
+      <workItem from="1754880047298" duration="8114000" />
+      <workItem from="1754978629800" duration="9000" />
+      <workItem from="1754997003007" duration="18000" />
+      <workItem from="1755481659527" duration="7337000" />
+      <workItem from="1755575443630" duration="5117000" />
+      <workItem from="1755592567140" duration="1669000" />
+      <workItem from="1755651239457" duration="788000" />
+      <workItem from="1755657798510" duration="1259000" />
+      <workItem from="1755674301957" duration="577000" />
+      <workItem from="1755841180677" duration="2149000" />
+      <workItem from="1756088564398" duration="162000" />
+      <workItem from="1757054732974" duration="614000" />
+      <workItem from="1757386742657" duration="3391000" />
+      <workItem from="1757484702393" duration="1959000" />
+      <workItem from="1757990687802" duration="3082000" />
+      <workItem from="1758249840461" duration="1140000" />
+      <workItem from="1758682824171" duration="5822000" />
+      <workItem from="1759023646287" duration="5241000" />
+      <workItem from="1759195732764" duration="4247000" />
+      <workItem from="1760323827586" duration="733000" />
+      <workItem from="1760583311246" duration="4298000" />
+      <workItem from="1760948231904" duration="6432000" />
+      <workItem from="1761111402170" duration="4561000" />
+      <workItem from="1761119163796" duration="53000" />
+      <workItem from="1761119347379" duration="5313000" />
+      <workItem from="1761194502962" duration="10781000" />
+      <workItem from="1761212794707" duration="1873000" />
+      <workItem from="1761271361825" duration="1082000" />
+      <workItem from="1761274842198" duration="2450000" />
+      <workItem from="1761478431645" duration="65000" />
+      <workItem from="1761478517700" duration="409000" />
+      <workItem from="1761535984100" duration="1549000" />
+      <workItem from="1761544879240" duration="3014000" />
+      <workItem from="1761548934856" duration="1629000" />
+      <workItem from="1761618098496" duration="3414000" />
+      <workItem from="1761726599568" duration="979000" />
+      <workItem from="1761795302519" duration="1525000" />
+      <workItem from="1761809709469" duration="1178000" />
+      <workItem from="1761812135048" duration="2044000" />
+      <workItem from="1761814386870" duration="30107000" />
+      <workItem from="1762133538737" duration="57395000" />
+      <workItem from="1762740576892" duration="97966000" />
+      <workItem from="1763276873462" duration="16454000" />
+      <workItem from="1763358587268" duration="38119000" />
+      <workItem from="1763711796480" duration="2194000" />
+      <workItem from="1763717698322" duration="50000" />
+      <workItem from="1763950502194" duration="133625000" />
+      <workItem from="1764829713353" duration="49626000" />
+      <workItem from="1765038668091" duration="101000" />
+      <workItem from="1765179182834" duration="6679000" />
+      <workItem from="1765251809657" duration="8240000" />
+      <workItem from="1765766812744" duration="3785000" />
+      <workItem from="1765797904167" duration="13000" />
+      <workItem from="1765811900652" duration="635000" />
+      <workItem from="1765979092476" duration="84000" />
+      <workItem from="1766198151220" duration="1376000" />
+      <workItem from="1766542284000" duration="6921000" />
+      <workItem from="1766580224938" duration="768000" />
+      <workItem from="1766581703613" duration="967000" />
+      <workItem from="1766730770175" duration="6289000" />
+      <workItem from="1766975668780" duration="26863000" />
+      <workItem from="1767265818172" duration="189000" />
+      <workItem from="1767594622592" duration="1161000" />
+      <workItem from="1767756878975" duration="3163000" />
+      <workItem from="1768185498972" duration="615000" />
+      <workItem from="1768282243579" duration="21465000" />
+      <workItem from="1768881776365" duration="10595000" />
+      <workItem from="1768985348173" duration="6277000" />
+      <workItem from="1769151495979" duration="37475000" />
+      <workItem from="1771988965543" duration="176000" />
+      <workItem from="1771989256196" duration="4706000" />
+      <workItem from="1772072978002" duration="54780000" />
+      <workItem from="1773041652578" duration="945000" />
+      <workItem from="1773109760380" duration="2810000" />
+      <workItem from="1782880176153" duration="2321000" />
+      <workItem from="1783591871336" duration="1242000" />
+      <workItem from="1785896593208" duration="2753000" />
+      <workItem from="1786006522383" duration="1111000" />
+      <workItem from="1786008389055" duration="45000" />
+      <workItem from="1786008492008" duration="100000" />
+      <workItem from="1786415043368" duration="7708000" />
+      <workItem from="1786446175462" duration="608000" />
+      <workItem from="1786521019314" duration="233000" />
+      <workItem from="1786587665585" duration="15955000" />
+      <workItem from="1786674360948" duration="1911000" />
+      <workItem from="1786676618494" duration="1792000" />
+      <workItem from="1786683659866" duration="5785000" />
+      <workItem from="1786694775749" duration="2596000" />
+      <workItem from="1786930521308" duration="1350000" />
+    </task>
+    <task id="LOCAL-00001" summary="初始架构">
+      <created>1748315050476</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1748315050476</updated>
+    </task>
+    <task id="LOCAL-00002" summary="初始架构">
+      <created>1749022593651</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1749022593651</updated>
+    </task>
+    <task id="LOCAL-00003" summary="mqtt（氧气传感器）">
+      <created>1749022620933</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1749022620933</updated>
+    </task>
+    <task id="LOCAL-00004" summary="mqtt（氧气传感器）修改配置">
+      <created>1749031660905</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1749031660905</updated>
+    </task>
+    <task id="LOCAL-00005" summary="修改readme">
+      <created>1749032662155</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1749032662155</updated>
+    </task>
+    <task id="LOCAL-00006" summary="修改mqtt氧气模块，新增4gio服务模块">
+      <created>1749101395351</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1749101395351</updated>
+    </task>
+    <task id="LOCAL-00007" summary="4gio对接API接口">
+      <created>1749117872665</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1749117872665</updated>
+    </task>
+    <task id="LOCAL-00008" summary="新增注释">
+      <created>1749436895007</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1749436895007</updated>
+    </task>
+    <task id="LOCAL-00009" summary="修改工业网关接收数据参数+mqtt发布消息">
+      <created>1751542320777</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1751542320777</updated>
+    </task>
+    <task id="LOCAL-00010" summary="修改登录接口，整合数据接收">
+      <created>1752718298856</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1752718298856</updated>
+    </task>
+    <task id="LOCAL-00011" summary="修改登录接口，整合数据接收">
+      <created>1752733042622</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1752733042622</updated>
+    </task>
+    <task id="LOCAL-00012" summary="修改续电器">
+      <created>1752733556069</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1752733556069</updated>
+    </task>
+    <task id="LOCAL-00013" summary="修改设备详情接口">
+      <created>1752818944762</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1752818944762</updated>
+    </task>
+    <task id="LOCAL-00014" summary="修改设备查询接口">
+      <created>1752819612257</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1752819612257</updated>
+    </task>
+    <task id="LOCAL-00015" summary="修改mqtt推送">
+      <created>1752825679530</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1752825679530</updated>
+    </task>
+    <task id="LOCAL-00016" summary="修改mqtt推送">
+      <created>1753949377762</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1753949377762</updated>
+    </task>
+    <task id="LOCAL-00017" summary="新增摄像头接口">
+      <created>1754278157186</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1754278157186</updated>
+    </task>
+    <task id="LOCAL-00018" summary="修改mqtt发送接口">
+      <created>1754880102101</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1754880102101</updated>
+    </task>
+    <task id="LOCAL-00019" summary="代码优化">
+      <created>1758682984581</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1758682984581</updated>
+    </task>
+    <task id="LOCAL-00020" summary="新建shell">
+      <created>1758683017795</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1758683017795</updated>
+    </task>
+    <task id="LOCAL-00021" summary="新增">
+      <created>1761908718650</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1761908718650</updated>
+    </task>
+    <task id="LOCAL-00022" summary="mqtt协议配置">
+      <created>1762223221318</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1762223221318</updated>
+    </task>
+    <task id="LOCAL-00023" summary="mqtt新增重连机制">
+      <created>1762326310824</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1762326310824</updated>
+    </task>
+    <task id="LOCAL-00024" summary="mqtt数据接收入库，数据类型调整，数据处理">
+      <created>1762420172403</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1762420172403</updated>
+    </task>
+    <task id="LOCAL-00025" summary="修改mqtt配置位置">
+      <created>1762420618158</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1762420618158</updated>
+    </task>
+    <task id="LOCAL-00026" summary="mqtt自动识别设备是否在线">
+      <created>1762524524809</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1762524524809</updated>
+    </task>
+    <task id="LOCAL-00027" summary="tcp协议对接">
+      <created>1762524752549</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1762524752549</updated>
+    </task>
+    <task id="LOCAL-00028" summary="新增子设备的数据，定时检测网关状态">
+      <created>1762758921493</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1762758921493</updated>
+    </task>
+    <task id="LOCAL-00029" summary="设置自动化参数配置-自动控制设备">
+      <created>1762772649144</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1762772649144</updated>
+    </task>
+    <task id="LOCAL-00030" summary="构建摄像头模块">
+      <created>1762831072518</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1762831072518</updated>
+    </task>
+    <task id="LOCAL-00031" summary="编写unity远程数据接口">
+      <created>1762915686659</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1762915686659</updated>
+    </task>
+    <task id="LOCAL-00032" summary="摄像头接口-增删改查">
+      <created>1762930019814</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1762930019814</updated>
+    </task>
+    <task id="LOCAL-00033" summary="修改摄像头接口">
+      <created>1762931540842</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1762931540842</updated>
+    </task>
+    <task id="LOCAL-00034" summary="气象站数据接收">
+      <created>1763033494268</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1763033494268</updated>
+    </task>
+    <task id="LOCAL-00035" summary="TCP解析ASCII值">
+      <created>1763033517722</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1763033517722</updated>
+    </task>
+    <task id="LOCAL-00036" summary="TCP解析ASCII值存储">
+      <created>1763105322956</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1763105322956</updated>
+    </task>
+    <task id="LOCAL-00037" summary="重构气象站数据接收">
+      <created>1763431005930</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1763431005930</updated>
+    </task>
+    <task id="LOCAL-00038" summary="数据格式">
+      <created>1763717740435</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1763717740435</updated>
+    </task>
+    <task id="LOCAL-00039" summary="修改数据库">
+      <created>1764323408169</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1764323408169</updated>
+    </task>
+    <task id="LOCAL-00040" summary="前端UI">
+      <created>1764323563027</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1764323563027</updated>
+    </task>
+    <task id="LOCAL-00041" summary="摄像头页面">
+      <created>1764558651091</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1764558651091</updated>
+    </task>
+    <task id="LOCAL-00042" summary="完整代码">
+      <created>1765038758252</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1765038758252</updated>
+    </task>
+    <task id="LOCAL-00043" summary="完整代码">
+      <created>1768985095366</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1768985095366</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="修改mqtt发送接口" />
+    <MESSAGE value="代码优化" />
+    <MESSAGE value="新建shell" />
+    <MESSAGE value="新增" />
+    <MESSAGE value="mqtt协议配置" />
+    <MESSAGE value="mqtt新增重连机制" />
+    <MESSAGE value="mqtt数据接收入库，数据类型调整，数据处理" />
+    <MESSAGE value="修改mqtt配置位置" />
+    <MESSAGE value="mqtt自动识别设备是否在线" />
+    <MESSAGE value="tcp协议对接" />
+    <MESSAGE value="新增子设备的数据，定时检测网关状态" />
+    <MESSAGE value="设置自动化参数配置-自动控制设备" />
+    <MESSAGE value="构建摄像头模块" />
+    <MESSAGE value="编写unity远程数据接口" />
+    <MESSAGE value="摄像头接口-增删改查" />
+    <MESSAGE value="修改摄像头接口" />
+    <MESSAGE value="气象站数据接收" />
+    <MESSAGE value="TCP解析ASCII值" />
+    <MESSAGE value="TCP解析ASCII值存储" />
+    <MESSAGE value="重构气象站数据接收" />
+    <MESSAGE value="数据格式" />
+    <MESSAGE value="修改数据库" />
+    <MESSAGE value="前端UI" />
+    <MESSAGE value="摄像头页面" />
+    <MESSAGE value="完整代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="完整代码" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.springframework.beans.factory.BeanDefinitionStoreException" package="org.springframework.beans.factory" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

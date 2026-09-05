@@ -1,0 +1,4 @@
+com/management/camera/server/IotCameraInfoService.class
+com/management/camera/mapper/IotCameraInfoMapper.class
+com/management/camera/server/impl/IotCameraInfoServiceImpl.class
+com/management/camera/domain/IotCameraInfo.class

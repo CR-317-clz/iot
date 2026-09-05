@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.iot.mapper.IotAutomationConfigMapper">
+
+    <!-- 自动化配置结果映射 -->
+    <resultMap type="IotAutomationConfig" id="IotAutomationConfigResult">
+        <result property="automationId" column="automation_id"/>
+        <result property="protocolId" column="protocol_id"/>
+        <result property="setTemperature" column="set_temperature"/>
+        <result property="setHumidity" column="set_humidity"/>
+        <result property="setIlluminance" column="set_illuminance"/>
+        <result property="setSoilMoisture" column="set_soil_moisture"/>
+        <result property="setCarbonMonoxide" column="set_carbon_monoxide"/>
+        <result property="setCarbonDioxide" column="set_carbon_dioxide"/>
+        <result property="setUltravioletRay" column="set_ultraviolet_ray"/>
+        <result property="enabled" column="enabled"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!-- 查询字段SQL片段，避免重复编写 -->
+    <sql id="selectConfigVo">
+        select automation_id, protocol_id, set_temperature, set_humidity, set_illuminance,
+               set_soil_moisture, set_carbon_monoxide, set_carbon_dioxide, set_ultraviolet_ray,
+               enabled, create_time, update_time
+        from iot_automation_config
+    </sql>
+
+    <!-- 查询所有启用的自动化配置 -->
+    <select id="selectEnabledConfigs" resultMap="IotAutomationConfigResult">
+        <include refid="selectConfigVo"/>
+        where enabled = '1'
+        order by create_time desc
+    </select>
+
+    <!-- 根据协议ID查询自动化配置 -->
+    <select id="selectConfigByProtocolId" parameterType="Long" resultMap="IotAutomationConfigResult">
+        <include refid="selectConfigVo"/>
+        where protocol_id = #{protocolId}
+    </select>
+
+    <!-- 新增自动化配置 -->
+    <insert id="insertConfig" parameterType="IotAutomationConfig" useGeneratedKeys="true" keyProperty="automationId">
+        insert into iot_automation_config (
+            protocol_id, set_temperature, set_humidity, set_illuminance,
+            set_soil_moisture, set_carbon_monoxide, set_carbon_dioxide, set_ultraviolet_ray,
+            enabled, create_time, update_time
+        ) values (
+                     #{protocolId}, #{setTemperature}, #{setHumidity}, #{setIlluminance},
+                     #{setSoilMoisture}, #{setCarbonMonoxide}, #{setCarbonDioxide}, #{setUltravioletRay},
+                     #{enabled}, #{createTime}, #{updateTime}
+                 )
+    </insert>
+
+    <!-- 更新自动化配置 -->
+    <update id="updateConfig" parameterType="IotAutomationConfig">
+        update iot_automation_config
+        <set>
+            <if test="setTemperature != null">set_temperature = #{setTemperature},</if>
+            <if test="setHumidity != null">set_humidity = #{setHumidity},</if>
+            <if test="setIlluminance != null">set_illuminance = #{setIlluminance},</if>
+            <if test="setSoilMoisture != null">set_soil_moisture = #{setSoilMoisture},</if>
+            <if test="setCarbonMonoxide != null">set_carbon_monoxide = #{setCarbonMonoxide},</if>
+            <if test="setCarbonDioxide != null">set_carbon_dioxide = #{setCarbonDioxide},</if>
+            <if test="setUltravioletRay != null">set_ultraviolet_ray = #{setUltravioletRay},</if>
+            <if test="enabled != null and enabled != ''">enabled = #{enabled},</if>
+            <if test="updateTime != null">update_time = #{updateTime}</if>
+        </set>
+        where automation_id = #{automationId}
+    </update>
+
+    <!-- 根据配置ID删除自动化配置 -->
+    <delete id="deleteConfig" parameterType="Long">
+        delete from iot_automation_config where automation_id = #{automationId}
+    </delete>
+
+    <!-- 根据协议ID删除自动化配置 -->
+    <delete id="deleteConfigByProtocolId" parameterType="Long">
+        delete from iot_automation_config where protocol_id = #{protocolId}
+    </delete>
+
+</mapper>

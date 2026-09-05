@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.iot.mapper.IotEventMapper">
+
+    <!--  查询所有事件记录  -->
+    <select id="selectAllEvents" resultType="com.management.iot.domain.IotEvent">
+        SELECT * FROM iot_event ORDER BY event_time DESC
+    </select>
+
+    <!--  根据事件ID查询事件  -->
+    <select id="selectEventById" resultType="com.management.iot.domain.IotEvent"
+            parameterType="java.lang.Long">
+        SELECT * FROM iot_event WHERE event_id = #{eventId}
+    </select>
+
+    <!--  根据设备ID查询事件列表  -->
+    <select id="selectEventsByDeviceId" resultType="com.management.iot.domain.IotEvent"
+            parameterType="java.lang.Long">
+        SELECT * FROM iot_event WHERE device_id = #{deviceId} ORDER BY event_time DESC
+    </select>
+
+    <!--  根据事件类型查询事件列表  -->
+    <select id="selectEventsByType" resultType="com.management.iot.domain.IotEvent"
+            parameterType="java.lang.String">
+        SELECT * FROM iot_event WHERE event_type = #{eventType} ORDER BY event_time DESC
+    </select>
+
+    <!--  根据设备ID和时间范围查询事件  -->
+    <select id="selectEventsByTimeRange" resultType="com.management.iot.domain.IotEvent">
+        SELECT * FROM iot_event WHERE device_id = #{deviceId} AND event_time BETWEEN #{startTime} AND #{endTime} ORDER BY event_time DESC
+    </select>
+
+    <!--  统计指定类型事件的数量  -->
+    <select id="countEventsByType" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(*) FROM iot_event WHERE event_type = #{eventType}
+    </select>
+
+    <!--  插入新事件记录  -->
+    <insert id="insertEvent" parameterType="com.management.iot.domain.IotEvent">
+        INSERT INTO iot_event
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deviceId != null">device_id,</if>
+            <if test="eventType != null">event_type,</if>
+            <if test="description != null">description,</if>
+            event_time
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="deviceId != null">#{deviceId},</if>
+            <if test="eventType != null">#{eventType},</if>
+            <if test="description != null">#{description},</if>
+            CURRENT_TIMESTAMP
+        </trim>
+    </insert>
+
+    <!--  批量插入事件记录  -->
+    <insert id="batchInsertEvents" parameterType="java.util.List">
+        INSERT INTO iot_event (device_id, event_type, description, event_time)
+        VALUES
+        <foreach collection="list" item="event" separator=",">
+            (
+            #{event.deviceId},
+            #{event.eventType},
+            #{event.description},
+            CURRENT_TIMESTAMP
+            )
+        </foreach>
+    </insert>
+
+    <!--  根据事件ID删除事件记录  -->
+    <delete id="deleteEventById" parameterType="java.lang.Integer">
+        DELETE FROM iot_event WHERE event_id = #{eventId
+    </delete>
+</mapper>

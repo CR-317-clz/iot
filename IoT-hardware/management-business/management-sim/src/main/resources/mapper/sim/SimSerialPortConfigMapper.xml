@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.sim.mapper.SimSerialPortConfigMapper">
+
+    <resultMap id="BaseResultMap" type="com.management.sim.domain.SimSerialPortConfig">
+        <id property="serialId" column="serial_id" jdbcType="BIGINT"/>
+        <result property="equipmentConfigurationType" column="equipment_configuration_type" jdbcType="VARCHAR"/>
+        <result property="panId" column="pan_id" jdbcType="VARCHAR"/>
+        <result property="channel" column="channel" jdbcType="INTEGER"/>
+        <result property="uniqueIdentification" column="unique_identification" jdbcType="VARCHAR"/>
+        <result property="timeoutMs" column="timeout_ms" jdbcType="INTEGER"/>
+        <result property="autoReconnect" column="auto_reconnect" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="saveSerialPortConfig" parameterType="com.management.sim.domain.SimSerialPortConfig">
+        insert into sim_serial_port_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="serialId != null">serial_id,</if>
+            <if test="equipmentConfigurationType != null">equipment_configuration_type,</if>
+            <if test="panId != null">pan_id,</if>
+            <if test="channel != null">channel,</if>
+            <if test="uniqueIdentification != null">unique_identification,</if>
+            <if test="timeoutMs != null">timeout_ms,</if>
+            <if test="autoReconnect != null">auto_reconnect,</if>
+            <if test="status != null">status,</if>
+            create_time
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="serialId != null">#{serialId},</if>
+            <if test="equipmentConfigurationType != null">#{equipmentConfigurationType},</if>
+            <if test="panId != null">#{panId},</if>
+            <if test="channel != null">#{channel},</if>
+            <if test="uniqueIdentification != null">#{uniqueIdentification},</if>
+            <if test="timeoutMs != null">#{timeoutMs},</if>
+            <if test="autoReconnect != null">#{autoReconnect},</if>
+            <if test="status != null">#{status},</if>
+            CURRENT_TIMESTAMP
+        </trim>
+    </insert>
+
+
+    <select id="getAllSerialPortConfig" resultType="com.management.sim.domain.SimSerialPortConfig" resultMap="BaseResultMap">
+        select * from sim_serial_port_config
+    </select>
+    <select id="getUniqueIdentification" resultType="com.management.sim.domain.SimSerialPortConfig">
+        select * from sim_serial_port_config where unique_identification = #{uniqueIdentification}
+    </select>
+    <select id="getAllCoordinators" resultType="com.management.sim.domain.SimSerialPortConfig">
+        SELECT * FROM sim_serial_port_config
+        WHERE equipment_configuration_type = #{equipmentType}
+    </select>
+    <select id="getBySerialId" resultType="com.management.sim.domain.SimSerialPortConfig">
+        SELECT * FROM sim_serial_port_config
+        WHERE serial_id = #{serialId}
+    </select>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/management-admin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-admin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-4GIO/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-4GIO/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-camera/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-camera/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-hik/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-hik/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-iot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-iot/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-lock/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-lock/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-mqtt/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-mqtt/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-sim/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/management-sim/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-business/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-framework/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-framework/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-generator/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-generator/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-quartz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-quartz/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,189 @@
+#index {
+  color: #d3d6dd;
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: left top;
+  overflow: hidden;
+  
+  .bg {
+    width: 100%;
+    height: 100%;
+    padding: 16px 16px 0 16px;
+    background-image: url("../assets/pageBg.png");
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .host-body {
+    .dv-dec-10,
+    .dv-dec-10-s {
+      width: 33.3%;
+      height: 5px;
+    }
+    .dv-dec-10-s {
+      transform: rotateY(180deg);
+    }
+    .dv-dec-8 {
+      width: 200px;
+      height: 50px;
+    }
+    .title {
+      position: relative;
+      width: 500px;
+      text-align: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      .title-text {
+        font-weight: 900;
+        width: 100%;
+        line-height: 32px;
+        height: 32px;
+        font-size: 30px;
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translate(-50%);
+        //字体蓝白渐变色
+        background: linear-gradient(to right, #50e3c2, #67a1e5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .dv-dec-6 {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        width: 250px;
+        height: 8px;
+        transform: translate(-50%);
+      }
+    }
+
+    // 第二行
+    .aside-width {
+      width: 40%;
+    }
+    .react-r-s,
+    .react-l-s {
+      background-color: #0f1325;
+    }
+
+    // 平行四边形
+    .react-right {
+      &.react-l-s {
+        text-align: right;
+        width: 400px;
+      }
+      font-size: 18px;
+      width: 300px;
+      line-height: 50px;
+      text-align: center;
+      transform: skewX(-45deg);
+
+      .react-after {
+        position: absolute;
+        right: -25px;
+        top: 0;
+        height: 50px;
+        width: 50px;
+        background-color: #0f1325;
+        transform: skewX(45deg);
+      }
+
+      .text {
+        display: inline-block;
+        transform: skewX(45deg);
+      }
+    }
+
+    .react-left {
+      &.react-l-s {
+        width: 500px;
+        text-align: left;
+      }
+      font-size: 18px;
+      width: 300px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      transform: skewX(45deg);
+
+      .react-left {
+        position: absolute;
+        left: -25px;
+        top: 0;
+        height: 50px;
+        width: 50px;
+        background-color: #0f1325;
+        transform: skewX(-45deg);
+      }
+
+      .text {
+        display: inline-block;
+        transform: skewX(-45deg);
+      }
+    }
+
+    .body-box {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      // 重新计算主体高度：1080px - 第一行(约90px) - 第二行(约70px) - 上padding(16px)
+      height: calc(1080px - 90px - 70px - 16px); // 第一行约90px，第二行约70px，padding合计16px
+      min-height: 0; // 防止溢出
+      box-sizing: border-box;
+      .column {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 0 8px;
+        
+        // 为每个边框容器设置平均分配的高度
+        > div {
+          margin-bottom: 16px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+      .column:first-child {
+        flex: 4;
+        
+        // 左侧列的三个容器平均分配高度
+        > div {
+          flex: 1;
+          height: calc((100% - 32px) / 3); // 减去margin的高度后平均分配
+        }
+      }
+      .column:nth-child(2) {
+        flex: 6;
+        
+        // 中间列的容器分配
+        > div:first-child {
+          flex: 1;
+          height: 60%;
+          margin-bottom: 16px;
+        }
+        > div:last-child {
+          flex: 1;
+          height: calc(40% - 16px);
+        }
+      }
+      .column:last-child {
+        flex: 4;
+        
+        // 右侧列的三个容器平均分配高度
+        > div {
+          flex: 1;
+          height: calc((100% - 32px) / 3); // 减去margin的高度后平均分配
+        }
+      }
+    }
+  }
+}

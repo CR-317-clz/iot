@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.sim.mapper.SimVirtualDeviceMapper">
+
+    <!-- 基础结果映射 -->
+    <resultMap id="BaseResultMap" type="com.management.sim.domain.SimVirtualDevice">
+        <id column="virtual_id" property="virtualId" jdbcType="BIGINT"/>
+        <result column="genre_id" property="genreId" jdbcType="BIGINT"/>
+        <result column="virtual_name" property="virtualName" jdbcType="VARCHAR"/>
+        <result column="virtual_code" property="virtualCode" jdbcType="VARCHAR"/>
+        <result column="images" property="images" jdbcType="VARCHAR"/>
+        <result column="voltage" property="voltage" jdbcType="INTEGER"/>
+        <result column="agreement" property="agreement" jdbcType="VARCHAR"/>
+        <result column="threshold" property="threshold"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"
+                jdbcType="VARCHAR"/>
+        <!-- 重点：配置 pin 字段的 typeHandler -->
+        <result column="pin" property="pin"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"
+                jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="is_node" property="isNode" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 带联查的结果映射 -->
+    <resultMap id="WithGenreResultMap" type="com.management.sim.domain.SimVirtualDevice" extends="BaseResultMap">
+        <!-- 联查字段 -->
+        <result column="genre_name" property="genreName" jdbcType="VARCHAR"/>
+        <result column="sensor_code" property="sensorCode" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="removeByVirtualId">
+        DELETE FROM sim_virtual_device WHERE virtual_id = #{virtualId}
+    </delete>
+
+    <select id="getAllSimVirtualDevice" resultMap="WithGenreResultMap">
+        SELECT d.*, g.sensor_name as genre_name, g.sensor_code as sensor_code FROM sim_virtual_device d
+        LEFT JOIN sim_sensor_genre g ON d.genre_id = g.sensor_id WHERE d.status = '1' and g.status = '1'
+        ORDER BY d.sort
+    </select>
+</mapper>

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.iot.mapper.IotTelemetryMapper">
+
+    <!--  查询所有时序数据  -->
+    <select id="selectAllTelemetry" resultType="com.management.iot.domain.IotTelemetry">
+        SELECT * FROM iot_telemetry ORDER BY record_time DESC limit 8
+    </select>
+
+    <!--  根据设备ID查询时序数据  -->
+    <select id="selectTelemetryByDeviceId" resultType="com.management.iot.domain.IotTelemetry"
+            parameterType="java.lang.Long">
+        SELECT
+            telemetry_id,
+            device_id,
+            data_key,
+            data_value,
+            unit,
+            record_time,
+            CASE data_key
+                WHEN 'SoilMoisture' THEN '土壤水分'
+                WHEN 'soiltemperature' THEN '土壤温度'
+                WHEN 'SoilElectricalConductivity' THEN '土壤电导率'
+                WHEN 'temperature' THEN '温度'
+                WHEN 'humidity' THEN '湿度'
+                WHEN 'illuminance' THEN '光照度'
+                WHEN 'windspeed' THEN '风速'
+                WHEN 'winddirection' THEN '风向'
+                ELSE '未知'
+                END AS data_key_chinese
+        FROM iot_telemetry WHERE device_id = #{deviceId} ORDER BY record_time DESC limit 8
+    </select>
+
+    <!--  根据数据键名查询时序数据  -->
+    <select id="selectTelemetryByDataKey" resultType="com.management.iot.domain.IotTelemetry"
+            parameterType="java.lang.String">
+        SELECT * FROM iot_telemetry WHERE data_key = #{dataKey} ORDER BY record_time DESC limit 8
+    </select>
+
+    <!--  根据设备ID和时间范围查询时序数据  -->
+    <select id="selectTelemetryByTimeRange" resultType="com.management.iot.domain.IotTelemetry">
+        SELECT * FROM iot_telemetry WHERE device_id = #{deviceId} AND record_time BETWEEN #{startTime} AND #{endTime} ORDER BY record_time DESC limit 8
+    </select>
+
+    <!--  获取设备最新的数据  -->
+    <select id="selectLatestTelemetryByDeviceId" resultType="com.management.iot.domain.IotTelemetry"
+            parameterType="java.lang.Long">
+        SELECT t1.* FROM iot_telemetry t1 " +
+            "INNER JOIN (SELECT data_key, MAX(record_time) as max_time FROM iot_telemetry WHERE device_id = #{deviceId} GROUP BY data_key) t2 " +
+            "ON t1.data_key = t2.data_key AND t1.record_time = t2.max_time " +
+            "WHERE t1.device_id = #{deviceId}
+    </select>
+
+    <!--  获取设备最新的数据  -->
+    <select id="getMeteorologyRegisterData" resultType="com.management.iot.domain.IotTelemetry"
+            parameterType="java.lang.Long">
+        SELECT
+            telemetry_id,
+            device_id,
+            data_key,
+            data_value,
+            unit,
+            record_time
+        FROM iot_telemetry
+        WHERE data_key IN ('windspeed', 'winddirection')
+        ORDER BY record_time DESC,
+                 FIELD(data_key, 'winddirection', 'windspeed')
+            LIMIT 2;
+    </select>
+
+    <!--  获取设备数据统计信息  -->
+    <select id="getStatisticsTelemetryData" resultType="com.management.iot.domain.vo.StatisticsTelemetryDataVo">
+        WITH MinuteData AS (
+            SELECT
+            DATE(record_time) AS record_date,
+            HOUR(record_time) AS hour_of_day,
+            MINUTE(record_time) AS minute_of_hour,
+            device_id,
+            data_key,
+            AVG(data_value) AS avg_value,
+            unit
+        FROM
+            iot_telemetry
+        WHERE
+            DATE(record_time) = (SELECT MAX(DATE(record_time)) FROM iot_telemetry)
+        GROUP BY
+            DATE(record_time),
+            HOUR(record_time),
+            MINUTE(record_time),
+            device_id,
+            data_key,
+            unit
+            )
+        SELECT
+            device_id,
+            record_date,
+            CONCAT(LPAD(hour_of_day, 2, '0'), ':00') AS time_format,
+            data_key,
+            CASE
+                WHEN data_key = 'temperature' THEN '温度'
+                WHEN data_key = 'humidity' THEN '湿度'
+                WHEN data_key = 'illuminance' THEN '光照度'
+                WHEN data_key = 'windspeed' THEN '风速'
+                WHEN data_key = 'winddirection' THEN '风向'
+                WHEN data_key = 'soilmoisture' THEN '土壤水分'
+                WHEN data_key = 'soiltemperature' THEN '土壤温度'
+                WHEN data_key = 'soilelectricalconductivity' THEN '土壤电导率'
+                ELSE data_key
+                END AS data_key_chinese,
+            ROUND(AVG(avg_value), 4) AS hourly_avg_value,
+            unit,
+            COUNT(*) AS minute_count
+        FROM
+            MinuteData
+        WHERE
+            device_id = #{deviceId}
+            and
+            data_key = #{telemetryName}
+        GROUP BY
+            record_date,
+            hour_of_day,
+            device_id,
+            data_key,
+            unit
+        ORDER BY
+            device_id,
+            hour_of_day,
+            data_key;
+    </select>
+
+    <select id="getStatisticsTemperatureData" resultType="com.management.iot.domain.vo.StatisticsTemperatureDataVo" parameterType="long">
+        WITH RECURSIVE WeekDates AS (
+        SELECT
+        CURDATE() - INTERVAL WEEKDAY(CURDATE()) DAY AS date_value,
+        1 AS weekday_order,
+        '星期一' AS day_chinese
+        UNION ALL
+        SELECT
+        date_value + INTERVAL 1 DAY,
+        weekday_order + 1,
+        CASE weekday_order + 1
+        WHEN 2 THEN '星期二'
+        WHEN 3 THEN '星期三'
+        WHEN 4 THEN '星期四'
+        WHEN 5 THEN '星期五'
+        WHEN 6 THEN '星期六'
+        WHEN 7 THEN '星期日'
+        END
+        FROM WeekDates
+        WHERE weekday_order &lt; 7
+        ),
+        DeviceList AS (
+        SELECT DISTINCT device_id
+        FROM iot_telemetry
+        WHERE YEARWEEK(record_time, 1) = YEARWEEK(CURDATE(), 1)
+        ),
+        TempData AS (
+        SELECT
+        device_id,
+        DATE(record_time) AS record_date,
+        AVG(data_value) AS avg_value,
+        MIN(data_value) AS min_value,
+        MAX(data_value) AS max_value,
+        COUNT(*) AS record_count,
+        unit
+        FROM
+        iot_telemetry
+        WHERE
+        YEARWEEK(record_time, 1) = YEARWEEK(CURDATE(), 1)
+        AND data_key = 'temperature'
+        GROUP BY
+        device_id,
+        DATE(record_time),
+        unit
+        )
+        SELECT
+        d.device_id,
+        w.date_value AS record_date,
+        w.day_chinese,
+        w.weekday_order,
+        '温度' AS data_key_chinese,
+        COALESCE(ROUND(t.avg_value, 4), 0) AS avg_temperature,
+        COALESCE(t.unit, '°C') AS unit,
+        COALESCE(t.record_count, 0) AS record_count,
+        YEARWEEK(w.date_value, 1) AS week_number
+        FROM
+        DeviceList d
+        CROSS JOIN
+        WeekDates w
+        LEFT JOIN
+        TempData t ON d.device_id = t.device_id AND w.date_value = t.record_date
+        WHERE
+        d.device_id = #{deviceId}
+        ORDER BY
+        d.device_id,
+        w.weekday_order;
+    </select>
+
+    <select id="getStatisticsHumidityData" resultType="com.management.iot.domain.vo.StatisticsTemperatureDataVo" parameterType="long">
+        WITH RECURSIVE WeekDates AS (
+        SELECT
+        CURDATE() - INTERVAL WEEKDAY(CURDATE()) DAY AS date_value,
+        1 AS weekday_order,
+        '星期一' AS day_chinese
+        UNION ALL
+        SELECT
+        date_value + INTERVAL 1 DAY,
+        weekday_order + 1,
+        CASE weekday_order + 1
+        WHEN 2 THEN '星期二'
+        WHEN 3 THEN '星期三'
+        WHEN 4 THEN '星期四'
+        WHEN 5 THEN '星期五'
+        WHEN 6 THEN '星期六'
+        WHEN 7 THEN '星期日'
+        END
+        FROM WeekDates
+        WHERE weekday_order &lt; 7
+        ),
+        DeviceList AS (
+        SELECT DISTINCT device_id
+        FROM iot_telemetry
+        WHERE YEARWEEK(record_time, 1) = YEARWEEK(CURDATE(), 1)
+        ),
+        TempData AS (
+        SELECT
+        device_id,
+        DATE(record_time) AS record_date,
+        AVG(data_value) AS avg_value,
+        MIN(data_value) AS min_value,
+        MAX(data_value) AS max_value,
+        COUNT(*) AS record_count,
+        unit
+        FROM
+        iot_telemetry
+        WHERE
+        YEARWEEK(record_time, 1) = YEARWEEK(CURDATE(), 1)
+        AND data_key = 'humidity'
+        GROUP BY
+        device_id,
+        DATE(record_time),
+        unit
+        )
+        SELECT
+        d.device_id,
+        w.date_value AS record_date,
+        w.day_chinese,
+        w.weekday_order,
+        '湿度' AS data_key_chinese,
+        COALESCE(ROUND(t.avg_value, 4), 0) AS avg_temperature,
+        COALESCE(t.unit, '°C') AS unit,
+        COALESCE(t.record_count, 0) AS record_count,
+        YEARWEEK(w.date_value, 1) AS week_number
+        FROM
+        DeviceList d
+        CROSS JOIN
+        WeekDates w
+        LEFT JOIN
+        TempData t ON d.device_id = t.device_id AND w.date_value = t.record_date
+        WHERE
+        d.device_id = #{deviceId}
+        ORDER BY
+        d.device_id,
+        w.weekday_order;
+    </select>
+
+    <!--  插入新时序数据记录  -->
+    <insert id="insertTelemetry" parameterType="com.management.iot.domain.IotTelemetry">
+        INSERT INTO iot_telemetry
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="telemetryId != null">telemetry_id,</if>
+            <if test="deviceId != null">device_id,</if>
+            <if test="dataKey != null">data_key,</if>
+            <if test="dataValue != null">data_value,</if>
+            <if test="unit != null">unit,</if>
+            record_time
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="telemetryId != null">#{telemetryId},</if>
+            <if test="deviceId != null">#{deviceId},</if>
+            <if test="dataKey != null">#{dataKey},</if>
+            <if test="dataValue != null">#{dataValue},</if>
+            <if test="unit != null">#{unit},</if>
+            CURRENT_TIMESTAMP
+        </trim>
+    </insert>
+
+    <!--  批量插入时序数据记录  -->
+    <insert id="batchInsertTelemetry"
+            parameterType="java.util.List">
+        INSERT INTO iot_telemetry (telemetry_id, device_id, data_key, data_value, unit, record_time)
+        VALUES
+        <foreach collection="telemetryList" item="item" separator=",">
+            (#{item.telemetryId},#{item.deviceId}, #{item.dataKey}, #{item.dataValue}, #{item.unit}, CONVERT_TZ(NOW(), @@session.time_zone, '+08:00'))
+        </foreach>
+    </insert>
+
+    <!--  根据设备ID删除时序数据  -->
+    <delete id="deleteTelemetryByDeviceId" parameterType="java.lang.Integer">
+        DELETE FROM iot_telemetry WHERE device_id = #{deviceId}
+    </delete>
+</mapper>

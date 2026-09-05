@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.io.mapper.IotMeteorologyDeviceMapper">
+
+    <!--  根据气象站设备名称查询设备信息  -->
+    <select id="selectMeteorologyDeviceByDeviceName" resultType="com.management.io.domain.IotMeteorologyDevice"
+            parameterType="java.lang.String">
+        SELECT * FROM iot_meteorology_device WHERE device_name = #{deviceName}
+    </select>
+
+    <!--  获取所有气象站设备信息  -->
+    <select id="getAllMeteorologyDevice" resultType="com.management.io.domain.IotMeteorologyDevice">
+        SELECT * FROM iot_meteorology_device
+    </select>
+
+    <!--  插入气象站设备信息  -->
+    <insert id="insertMeteorologyDevice" parameterType="com.management.io.domain.IotMeteorologyDevice">
+        INSERT INTO iot_meteorology_device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deviceId != null">device_id,</if>
+            <if test="systemCode != null">system_code,</if>
+            <if test="deviceAddr != null">device_addr,</if>
+            <if test="deviceName != null">device_name,</if>
+            <if test="lat != null">lat,</if>
+            <if test="lng != null">lng,</if>
+            <if test="deviceStatus != null">device_status,</if>
+            <if test="timestamp != null">timestamp,</if>
+            create_time
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="deviceId != null">#{deviceId},</if>
+            <if test="systemCode != null">#{systemCode},</if>
+            <if test="deviceAddr != null">#{deviceAddr},</if>
+            <if test="deviceName != null">#{deviceName},</if>
+            <if test="lat != null">#{lat},</if>
+            <if test="lng != null">#{lng},</if>
+            <if test="deviceStatus != null">#{deviceStatus},</if>
+            <if test="timestamp != null">#{timestamp},</if>
+            CURRENT_TIMESTAMP
+        </trim>
+    </insert>
+
+    <update id="updateMeteorologyDevice" parameterType="com.management.io.domain.IotMeteorologyDevice">
+        UPDATE iot_meteorology_device
+        <set>
+            <if test="systemCode != null">system_code = #{systemCode},</if>
+            <if test="deviceAddr != null">device_addr = #{deviceAddr},</if>
+            <if test="deviceName != null">device_name = #{deviceName},</if>
+            <if test="lat != null">lat = #{lat},</if>
+            <if test="lng != null">lng = #{lng},</if>
+            <if test="deviceStatus != null">device_status = #{deviceStatus},</if>
+            update_time = CURRENT_TIMESTAMP
+        </set>
+        WHERE device_id = #{deviceId}
+    </update>
+</mapper>
