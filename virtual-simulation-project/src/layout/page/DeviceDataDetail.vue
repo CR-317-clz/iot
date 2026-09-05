@@ -270,10 +270,10 @@
 
         <!-- 设备控制面板 -->
         <el-row :gutter="16" class="mt-16">
-          <el-col v-for="(item, index) in areaControls" :key="`${item.relayDeviceName}-${item.relayId || index}`" :span="8">
+          <el-col v-for="(item, index) in areaControls" :key="`${item.relayDeviceName}-${item.relayId || index}`" :span="12">
             <el-card class="chart-card control-card mb-16">
               <div slot="header">
-                <span><i class="el-icon-setting"></i> {{ item.relayDeviceName }}控制</span>
+                <span><i class="el-icon-setting"></i> {{ getControlDisplayName(item.relayDeviceName) }}控制</span>
               </div>
               <div class="control-panel">
                 <i :class="getDeviceIconClass(item.relayDeviceName, item.status)"></i>
@@ -545,6 +545,8 @@ const DEVICE_ICON_MAP = {
   风扇: "icon-paifeng-",
   紫外线灯: "icon-ziwaixiandeng",
   灯: "icon-ziwaixiandeng", // 新增：灯
+  一号位: "icon-shower",
+  四号位: "icon-ziwaixiandeng",
   滴灌: "icon-diguan",
   加热灯: "icon-tubiao-ditu-huozaibaojingqi",
   default: "icon-ziyuanxhdpi"
@@ -564,6 +566,11 @@ const DEVICE_CONTROL_PARAMS = {
   窗帘机: "curtainMachine",     // 窗帘机器（0-关 1-开 2-暂停）
   窗帘开关: "curtainMachine",   // 窗帘开关（兼容）
   遮阳帘: "curtainMachine",     // 遮阳帘（兼容）
+};
+
+const CONTROL_DISPLAY_NAMES = {
+  一号位: "喷淋",
+  四号位: "灯光"
 };
 
 // 传感器设备映射 - 用于传感器控制和设备自动化控制
@@ -1022,14 +1029,17 @@ export default {
           
           // 映射数据
           if (deviceList && deviceList.length > 0) {
-            const mappedData = deviceList.map((item, index) => ({
-              relayDeviceName: item.relayDeviceName,
-              status: Number(item.status),
-              relayId: item.relayId || `auto-${index}`, // 如果没有 relayId，生成一个唯一标识
-              protocolId: item.protocolId,
-              createTime: item.createTime,
-              _raw: item
-            }));
+            const hiddenControls = ['二号位', '窗帘机', '窗帘开关', '遮阳帘'];
+            const mappedData = deviceList
+              .filter(item => !hiddenControls.includes(item.relayDeviceName) && item.relayDeviceName !== '四号位')
+              .map((item, index) => ({
+                relayDeviceName: item.relayDeviceName === '三号位' ? '四号位' : item.relayDeviceName,
+                status: Number(item.status),
+                relayId: item.relayId || `auto-${index}`,
+                protocolId: item.protocolId,
+                createTime: item.createTime,
+                _raw: item
+              }));
             
             this.areaControls = mappedData;
             console.log('✅ 继电器设备状态映射完成:', this.areaControls);
@@ -1358,6 +1368,7 @@ export default {
     
     async handleDeviceControl(item, value, isRelay = true) {
       const originalValue = item.status;
+      const displayName = this.getControlDisplayName(item.relayDeviceName);
       
       try {
         if (isRelay) {
@@ -1367,14 +1378,14 @@ export default {
         item.status = value;
         
         const action = isRelay && item.relayDeviceName !== '窗帘开关'
-          ? `${item.relayDeviceName}${value ? "开启" : "关闭"}`
-          : `${item.relayDeviceName}${this.getCurtainStatusText(value)}`;
+          ? `${displayName}${value ? "开启" : "关闭"}`
+          : `${displayName}${this.getCurtainStatusText(value)}`;
           
         this.$message.success(action);
         this.addHistoryRecord(action);
       } catch (error) {
         console.error('设备控制失败:', error);
-        this.$message.error(`${item.relayDeviceName}控制失败: ${error.message || "未知错误"}`);
+        this.$message.error(`${displayName}控制失败: ${error.message || "未知错误"}`);
         item.status = originalValue;
       }
     },
@@ -1562,6 +1573,10 @@ export default {
       }
     },
     
+    getControlDisplayName(deviceName) {
+      return CONTROL_DISPLAY_NAMES[deviceName] || deviceName;
+    },
+
     getDeviceIconClass(deviceName, isActive) {
       const iconName = DEVICE_ICON_MAP[deviceName] || DEVICE_ICON_MAP.default;
       
