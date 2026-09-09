@@ -402,20 +402,20 @@ public class AutomationControlService {
     
     private void executeSoilMoistureRule(IotAutomationConfig config, TelemetryDto telemetry, 
                                        String sensorDataJson, String thresholdJson) {
-        //读取配置的土壤湿度阈值 411
+
         Long protocolId = config.getProtocolId();
-        
+        //读取配置的土壤湿度阈值 shouldTurnOnSpray
         boolean shouldTurnOnSpray = isConditionMet(telemetry.getSoilMoisture(), config.getSetSoilMoisture(), false);
         Boolean lastState = lastSprayState.get(protocolId);
-        
-        //避免重复触发 
+        //记录上一次设备状态 避免重复触发 lastState
         if (lastState != null && lastState == shouldTurnOnSpray) {
             return;
         }
+ 
         
-        //判断当前土壤湿度是否满足触发喷淋的条件，完成设备自动化
         try {
             if (shouldTurnOnSpray) {
+                //判断当前土壤湿度是否满足触发喷淋的条件，完成设备自动化 controlSpray
                 controlSpray(protocolId, 1);
                 String reason = buildControlReason("土壤湿度条件触发", telemetry.getSoilMoisture(), config.getSetSoilMoisture());
                 recordAutomationOperation(protocolId, DEVICE_TYPE_SPRAY, OPERATION_ON, 

@@ -175,60 +175,34 @@ export default {
     const showAlarm = ref(false)
     const alarmDeviceId = ref('')
     const alarmMoistureValue = ref(0)
-    let audioContext = null
-    let oscillatorNode = null
-    let gainNode = null
-    let alarmIntervalId = null
+    let alarmAudio = null
 
-    // ===== 告警声音（Web Audio API） =====
+    // ===== 告警声音（本地 MP3 循环播放） =====
     const playAlarmSound = () => {
       try {
-        // 复用预创建的 AudioContext；若不存在才新建
-        if (!audioContext) {
-          audioContext = new (window.AudioContext || window['webkitAudioContext'])()
+        if (!alarmAudio) {
+          alarmAudio = new Audio(process.env.BASE_URL + 'audio/xm3325.mp3')
+          alarmAudio.loop = true
         }
-        // 确保 context 处于 running 状态
-        if (audioContext.state === 'suspended') {
-          audioContext.resume()
+        if (alarmAudio.paused) {
+          alarmAudio.currentTime = 0
+          alarmAudio.play().catch((e) => {
+            console.warn('报警音频播放失败:', e)
+          })
         }
-        // 清掉之前可能残留的 oscillator
-        if (oscillatorNode) {
-          try { oscillatorNode.stop() } catch (e) {}
-          oscillatorNode = null
-        }
-        const playBeep = () => {
-          oscillatorNode = audioContext.createOscillator()
-          gainNode = audioContext.createGain()
-          oscillatorNode.type = 'square'
-          oscillatorNode.frequency.value = 880 // 高音蜂鸣
-          gainNode.gain.setValueAtTime(0.3, audioContext.currentTime)
-          oscillatorNode.connect(gainNode)
-          gainNode.connect(audioContext.destination)
-          oscillatorNode.start()
-          oscillatorNode.stop(audioContext.currentTime + 0.2)
-        }
-        // 每 600ms 蜂鸣一次
-        playBeep()
-        alarmIntervalId = setInterval(playBeep, 600)
       } catch (e) {
-        console.warn('AudioContext 不支持:', e)
+        console.warn('报警音频初始化失败:', e)
       }
     }
 
     const stopAlarmSound = () => {
-      if (alarmIntervalId) {
-        clearInterval(alarmIntervalId)
-        alarmIntervalId = null
+      if (alarmAudio) {
+        try {
+          alarmAudio.pause()
+          alarmAudio.currentTime = 0
+        } catch (e) {}
+        alarmAudio = null
       }
-      if (oscillatorNode) {
-        try { oscillatorNode.stop() } catch (e) {}
-        oscillatorNode = null
-      }
-      if (audioContext) {
-        try { audioContext.close() } catch (e) {}
-        audioContext = null
-      }
-      gainNode = null
     }
 
     // ===== 关闭报警弹窗 =====
@@ -265,13 +239,11 @@ export default {
       try {
         const deviceId = getDeviceId()
         console.log('📡 土壤监测-请求数据，设备ID:', deviceId)
-        
         const response = await axios.get(`/api/telemetry/device/${deviceId}`)
         console.log('✅ 土壤监测-API响应:', response.data)
 
         let dataList = []
         const respData = response.data
-        
         if (respData && respData.code === 200 && respData.rows && Array.isArray(respData.rows)) {
           dataList = respData.rows
         } else if (respData && Array.isArray(respData)) {
@@ -397,11 +369,12 @@ export default {
 
     // 定时任务机制 定时刷新土壤数据 
     const startDataUpdate = () => {
-      if (timer) clearInterval(timer)
-      timer = setInterval(() => {
-        console.log('⏰ 土壤监测-定时刷新')
-        fetchSoilData()
-      }, 1000)
+        if (timer) clearInterval(timer)
+        
+        timer = setInterval(() => {
+            console.log('⏰ 土壤监测-定时刷新')
+            fetchSoilData()
+        }, 1000)
     }
 
     onMounted(() => {
